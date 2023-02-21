@@ -1,0 +1,52 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace lintcode
+{
+    class Solution {
+        /**
+         * @param s: A string
+         * @param k: An integer
+         * @return: An integer
+         */
+        public int LengthOfLongestSubstringKDistinct(string s, int k) {
+             
+
+            Dictionary<char, int> dic = new Dictionary<char, int>();
+
+            int i = 0;
+            int start = 0;
+            int length = 0;
+
+            while(i <= s.Length-1)
+            {
+                //We will keep on addin the characters from the right side of the 
+                //string as long as we have k distict characters in the string and 
+                //we have not reached to the end of the string.
+                while(dic.Count <=k && i <= s.Length-1)
+                {
+                    if(!dic.ContainsKey(s[i]))
+                        dic.Add(s[i],1);
+                    else
+                        dic[s[i]]++;
+                    i++;
+                    //Check length only if the are k distinct characters i the string.
+                    if(dic.Count <= k)
+                        length = Math.Max(length, i- start);
+                }
+            //If count of dictionary items is greater than k then
+            //we will keep on removing items from left side of the string. 
+            if(start < s.Length)
+            {
+                dic[s[start]]--;
+                if(dic[s[start]]==0)
+                    dic.Remove(s[start]);
+                start++;
+            }
+    }
+    //Return the max length of the string 
+    return Math.Max(length, i- start);
+        }
+    }
+}
