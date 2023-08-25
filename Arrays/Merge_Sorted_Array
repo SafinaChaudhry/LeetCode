@@ -1,0 +1,36 @@
+//Need to fill the first array in reverse order starting ffrom the end and moving backwards. We will match elements from end of both arrays and start filling the first array from the end.
+public void Merge(int[] nums1, int m, int[] nums2, int n)
+        {
+            int length = m + n;
+            int a1 = m - 1;
+            int a2 = n - 1;
+
+
+            for (int i = m + n - 1; i >= 0; i--)
+            {
+                while (a1 >= 0 && a2 >= 0)
+                {
+                    if (nums2[a2] >= nums1[a1])
+                    {
+                        nums1[length-1] = nums2[a2];
+                        a2--;
+                    }
+                    else
+                    {
+                        nums1[length-1] = nums1[a1];
+                        a1--;
+                    }
+                    length--;
+                }
+
+                if (a2 >= 0)
+                {
+                    while (a2 >= 0)
+                    {
+                        nums1[length-1] = nums2[a2];
+                        a2--;
+                        length--;
+                    }
+                }
+            }
+        }
