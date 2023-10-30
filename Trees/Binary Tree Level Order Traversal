@@ -1,0 +1,48 @@
+
+public class TreeNode {
+      public int val;
+      public TreeNode left;
+      public TreeNode right;
+       public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
+ //Add nodes in the queue. Then while popping keep on adding the left and right children of the current node in the queue and add current 
+//node in the list to be returned.
+public IList<IList<int>> LevelOrder(TreeNode root) {
+
+        List<IList<int>> result = new List<IList<int>>();
+        if(root == null)
+        return result;
+
+        Queue<TreeNode> que = new Queue<TreeNode>();
+
+        que.Enqueue(root);
+
+        while(que.Count !=0)
+        {
+            int queCount = que.Count;
+            List<int> lst = new List<int>();
+
+            for(int i = 0;i<queCount;i++)
+            {
+                TreeNode currNode = que.Dequeue();
+                lst.Add(currNode.val);
+
+                if(currNode.left != null)
+                que.Enqueue(currNode.left);
+
+                
+                if(currNode.right != null)
+                que.Enqueue(currNode.right);
+
+            }
+
+            result.Add(lst);
+        }
+        return result;
+
+        
+    }
