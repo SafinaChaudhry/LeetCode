@@ -1,0 +1,50 @@
+ public int LongestConsecutive(int[] nums)
+        {
+
+//Brute Force Solution would be for each element we check for it consecutive elements in another for loop.
+So nexted loops are used to solve this solution.
+Its runtime is O(n^2);
+
+//Better Solution: Sort the array first and then check for consecutive elements in the array.
+Its runtime is O(nlogn).
+
+//Optimal Solution: Put the array elements in HashSet. Then for each element of hashset check that if it has a element 
+smaller then the current then simply continue as this is not the start of the list. If the current element dont have the 
+any smaller element in set then start a while loop to check all consecutive elements and keep incrementing the count;
+
+            if (nums.Length == 0 || nums.Length == 1)
+                return nums.Length;
+
+            HashSet<int> hs = new HashSet<int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!hs.Contains(nums[i]))
+                    hs.Add(nums[i]);
+            }
+
+            int maxCount = 1;
+            foreach (int x in hs)
+            {
+                int number = x;
+                int count = 1;
+
+                if (hs.Contains(number - 1))
+                    continue;
+                else
+                {
+                    while (hs.Contains(number + 1))
+                    {
+                        number = number - 1;
+                        count++;
+
+                    }
+
+                    maxCount = Math.Max(maxCount, count);
+
+                }
+            }
+
+            return maxCount;
+
+        }
