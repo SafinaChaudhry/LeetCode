@@ -1,0 +1,57 @@
+
+// Recursive Preorder Traversal.
+
+public IList<int> PreorderTraversal(TreeNode root) {
+        List<int> lst = new List<int>();
+        if(root == null) 
+        return lst;
+
+        PreOrder(root, lst);
+
+        return lst;
+
+
+        
+    }
+
+    public void PreOrder(TreeNode root, List<int> lst)
+    {
+    if(root == null)
+    return;
+
+    lst.Add(root.val);
+    PreOrder(  root.left,lst);
+    PreOrder( root.right,lst);
+    }
+
+
+//Iterative Preorder Traversal
+
+//Initialze a stack. Push the root in the stack. Now keep on popping top element and adding first the right child and then the left child
+// to the stack.
+
+ List<int> lst = new List<int>();
+
+       if(root == null)
+       return lst;
+
+       Stack<TreeNode> st = new Stack<TreeNode>();
+
+       st.Push(root);
+
+       while(st.Count != 0)
+       {
+           TreeNode curr = st.Pop();
+
+           lst.Add(curr.val);
+
+           if(curr.right != null)
+           st.Push(curr.right);
+
+           if(curr.left != null)
+           st.Push(curr.left);
+
+
+       }
+
+       return lst;
