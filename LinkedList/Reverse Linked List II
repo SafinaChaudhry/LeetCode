@@ -1,0 +1,33 @@
+ public ListNode ReverseBetween(ListNode head, int left, int right) {
+
+        ListNode dummy = new ListNode(0);
+        ListNode firstNode = dummy;
+
+        dummy.next = head;
+        int  i =1;
+
+
+        while(i != left)
+        {
+            dummy = dummy.next;
+            head = head.next;
+            i++;
+        }       
+
+        ListNode start = head;
+
+        ListNode prev = null; 
+
+        while(i != right +1)
+        {
+            ListNode temp = head.next;
+            head.next = prev;
+            prev = head;
+            head = temp;
+            i++;
+        }
+
+        dummy.next = prev;
+        start.next = head;
+        return firstNode.next;
+    }
